@@ -5,7 +5,7 @@ $current_user = getCurrentUser();
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-        <a class="navbar-brand" href="/biblioteca/">
+        <a class="navbar-brand" href="/biblioteca2/">
             <i class="bi bi-book"></i> Biblioteca
         </a>
         
@@ -17,33 +17,33 @@ $current_user = getCurrentUser();
             <?php if (isLoggedIn()): ?>
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/biblioteca/">
+                    <a class="nav-link" href="/biblioteca2/">
                         <i class="bi bi-house"></i> Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/biblioteca/books/">
+                    <a class="nav-link" href="/biblioteca2/books/">
                         <i class="bi bi-book"></i> Books
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/biblioteca/members/">
+                    <a class="nav-link" href="/biblioteca2/members/">
                         <i class="bi bi-people"></i> Members
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/biblioteca/categories/">
+                    <a class="nav-link" href="/biblioteca2/categories/">
                         <i class="bi bi-tags"></i> Categories
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/biblioteca/loans/">
+                    <a class="nav-link" href="/biblioteca2/loans/">
                         <i class="bi bi-arrow-left-right"></i> Loans
                     </a>
                 </li>
                 <?php if (isAdmin()): ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="/biblioteca/admin/">
+                    <a class="nav-link" href="/biblioteca2/admin/">
                         <i class="bi bi-person-gear"></i> Admin
                     </a>
                 </li>
@@ -56,7 +56,7 @@ $current_user = getCurrentUser();
                         <i class="bi bi-person-circle"></i> <?php echo htmlspecialchars($current_user['full_name']); ?>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/biblioteca/auth/logout.php">
+                        <li><a class="dropdown-item" href="/biblioteca2/auth/logout.php">
                             <i class="bi bi-box-arrow-right"></i> Logout
                         </a></li>
                     </ul>

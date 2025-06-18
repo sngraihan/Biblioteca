@@ -25,7 +25,7 @@ function getCurrentUser() {
 // Redirect to login if not authenticated
 function requireAuth() {
     if (!isLoggedIn()) {
-        header('Location: /biblioteca/auth/login.php');
+        header('Location: /biblioteca2/auth/login.php');
         exit();
     }
 }
@@ -39,7 +39,7 @@ function isAdmin() {
 function requireAdmin() {
     requireAuth();
     if (!isAdmin()) {
-        header('Location: /biblioteca/index.php?error=access_denied');
+        header('Location: /biblioteca2/index.php?error=access_denied');
         exit();
     }
 }
