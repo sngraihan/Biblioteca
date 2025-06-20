@@ -91,3 +91,82 @@ include '../includes/navbar.php';
         </div>
     </div>
    
+        <!-- Members List -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Members List (<?php echo count($members); ?> members found)</h5>
+                </div>
+                <div class="card-body">
+                    <?php if (isset($error)): ?>
+                        <?php echo showAlert($error, 'danger'); ?>
+                    <?php elseif (empty($members)): ?>
+                        <p class="text-muted text-center">No members found.</p>
+                    <?php else: ?>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Member Code</th>
+                                        <th>Name</th>
+                                        <th>Contact</th>
+                                        <th>Join Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($members as $member): ?>
+                                    <tr>
+                                        <td>
+                                            <strong><?php echo htmlspecialchars($member['member_code']); ?></strong>
+                                        </td>
+                                        <td><?php echo htmlspecialchars($member['name']); ?></td>
+                                        <td>
+                                            <?php if ($member['email']): ?>
+                                                <i class="bi bi-envelope"></i> <?php echo htmlspecialchars($member['email']); ?><br>
+                                            <?php endif; ?>
+                                            <?php if ($member['phone']): ?>
+                                                <i class="bi bi-telephone"></i> <?php echo htmlspecialchars($member['phone']); ?>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?php echo formatDate($member['join_date']); ?></td>
+                                        <td>
+                                            <span class="badge bg-<?php 
+                                                echo $member['status'] == 'active' ? 'success' : 
+                                                    ($member['status'] == 'inactive' ? 'secondary' : 'danger'); 
+                                            ?>">
+                                                <?php echo ucfirst($member['status']); ?>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a href="view.php?id=<?php echo $member['id']; ?>" 
+                                                   class="btn btn-outline-info" title="View Details">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                                <a href="edit.php?id=<?php echo $member['id']; ?>" 
+                                                   class="btn btn-outline-primary" title="Edit">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <a href="delete.php?id=<?php echo $member['id']; ?>" 
+                                                   class="btn btn-outline-danger" title="Delete"
+                                                   onclick="return confirm('Are you sure you want to delete this member?')">
+                                                    <i class="bi bi-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include '../includes/footer.php'; ?>
