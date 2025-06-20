@@ -113,3 +113,35 @@ include '../includes/navbar.php';
             </div>
         </div>
  
+                <!-- Statistics -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Loan Statistics</h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <div class="mb-3">
+                            <h4 class="text-primary"><?php echo $total_loans; ?></h4>
+                            <small class="text-muted">Total Loans</small>
+                        </div>
+                        <div class="mb-3">
+                            <h4 class="text-warning"><?php echo $active_loans; ?></h4>
+                            <small class="text-muted">Active Loans</small>
+                        </div>
+                        <div class="mb-3">
+                            <h4 class="text-danger"><?php echo $overdue_loans; ?></h4>
+                            <small class="text-muted">Overdue Loans</small>
+                        </div>
+                        
+                        <?php if ($member['status'] == 'active'): ?>
+                            <a href="../loans/add.php?member_id=<?php echo $member['id']; ?>" class="btn btn-primary btn-sm">
+                                <i class="bi bi-plus-circle"></i> New Loan
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
