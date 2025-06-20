@@ -55,3 +55,61 @@ try {
 } catch (Exception $e) {
     $error = 'Failed to load member details';
 }
+
+include '../includes/header.php';
+include '../includes/navbar.php';
+?>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1><i class="bi bi-person"></i> Member Details</h1>
+                <div>
+                    <a href="edit.php?id=<?php echo $member['id']; ?>" class="btn btn-primary">
+                        <i class="bi bi-pencil"></i> Edit Member
+                    </a>
+                    <a href="index.php" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to Members
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php if (isset($error)): ?>
+        <?php echo showAlert($error, 'danger'); ?>
+    <?php else: ?>
+    
+    <div class="row mb-4">
+        <!-- Member Information -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Member Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Member Code:</strong> <?php echo htmlspecialchars($member['member_code']); ?></p>
+                            <p><strong>Full Name:</strong> <?php echo htmlspecialchars($member['name']); ?></p>
+                            <p><strong>Email:</strong> <?php echo htmlspecialchars($member['email'] ?? 'N/A'); ?></p>
+                            <p><strong>Phone:</strong> <?php echo htmlspecialchars($member['phone'] ?? 'N/A'); ?></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Join Date:</strong> <?php echo formatDate($member['join_date']); ?></p>
+                            <p><strong>Status:</strong> 
+                                <span class="badge bg-<?php 
+                                    echo $member['status'] == 'active' ? 'success' : 
+                                        ($member['status'] == 'inactive' ? 'secondary' : 'danger'); 
+                                ?>">
+                                    <?php echo ucfirst($member['status']); ?>
+                                </span>
+                            </p>
+                            <p><strong>Address:</strong><br><?php echo nl2br(htmlspecialchars($member['address'] ?? 'N/A')); ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
