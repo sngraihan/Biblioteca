@@ -145,3 +145,70 @@ include '../includes/navbar.php';
         </div>
     </div>
  
+    <!-- Loan History -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Loan History</h5>
+                </div>
+                <div class="card-body">
+                    <?php if (empty($loan_history)): ?>
+                        <p class="text-muted text-center">No loan history found for this member.</p>
+                    <?php else: ?>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Loan Code</th>
+                                        <th>Book</th>
+                                        <th>Loan Date</th>
+                                        <th>Due Date</th>
+                                        <th>Return Date</th>
+                                        <th>Status</th>
+                                        <th>Fine</th>
+                                        <th>Processed By</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($loan_history as $loan): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($loan['loan_code']); ?></td>
+                                        <td>
+                                            <strong><?php echo htmlspecialchars($loan['book_title']); ?></strong>
+                                            <br><small class="text-muted">by <?php echo htmlspecialchars($loan['book_author']); ?></small>
+                                        </td>
+                                        <td><?php echo formatDate($loan['loan_date']); ?></td>
+                                        <td><?php echo formatDate($loan['due_date']); ?></td>
+                                        <td><?php echo $loan['return_date'] ? formatDate($loan['return_date']) : '-'; ?></td>
+                                        <td>
+                                            <span class="badge bg-<?php 
+                                                echo $loan['status'] == 'active' ? 'primary' : 
+                                                    ($loan['status'] == 'returned' ? 'success' : 'secondary'); 
+                                            ?>">
+                                                <?php echo ucfirst($loan['status']); ?>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <?php if ($loan['fine_amount'] > 0): ?>
+                                                <span class="text-danger">IDR <?php echo number_format($loan['fine_amount']); ?></span>
+                                            <?php else: ?>
+                                                -
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?php echo htmlspecialchars($loan['admin_name']); ?></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php endif; ?>
+</div>
+
+<?php include '../includes/footer.php'; ?>
